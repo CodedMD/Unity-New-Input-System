@@ -25,251 +25,29 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     ""maps"": [
         {
             ""name"": ""Player"",
-            ""id"": ""3309d09a-e728-401b-b5ce-e17257d0fbbd"",
+            ""id"": ""cbc36ed0-fa2b-4203-a566-7be0145900f6"",
             ""actions"": [
                 {
-                    ""name"": ""Color"",
+                    ""name"": ""Jump"",
                     ""type"": ""Button"",
-                    ""id"": ""d0ba0b8e-8912-440f-b854-fb50ac4a4a4e"",
+                    ""id"": ""58ba4729-6d59-4c48-a87e-cfc68894f385"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Rotation"",
-                    ""type"": ""Value"",
-                    ""id"": ""b80e8867-dcc7-4098-af0c-539338b7703b"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""DrivingMap"",
-                    ""type"": ""Button"",
-                    ""id"": ""985e1f4d-767e-4fc9-b407-b5c4475c5a9a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold(duration=1)"",
                     ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""8d2e5082-0efe-4c06-b353-3e053a5f2c16"",
+                    ""id"": ""039b437c-cf0d-4525-a00a-e655923b3b6f"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Color"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""6d1d447e-b2d8-4222-86a0-5509a1f17cb8"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": ""Invert"",
-                    ""groups"": """",
-                    ""action"": ""Rotation"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""39090fe1-d17e-49e7-a9c9-0796bee5d077"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""8bd2ec56-1e05-454b-a392-82e8667676a2"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""14d1a679-4b62-451f-885c-3575f21f2f66"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotation"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""009ce57c-99a0-47f0-99e0-e6857bfed819"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""cf6c43d2-8b7d-46e5-8a16-c28da1a67565"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""94517d56-bf86-43a2-865f-467135ce9921"",
-                    ""path"": ""<Keyboard>/t"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""DrivingMap"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Driving"",
-            ""id"": ""1d11b157-b53d-4259-84f2-041cf2bef598"",
-            ""actions"": [
-                {
-                    ""name"": ""Drive"",
-                    ""type"": ""Value"",
-                    ""id"": ""31245b2c-f245-4650-a196-b2063867d699"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": ""WASD"",
-                    ""id"": ""b995e8e3-aa8e-4d1c-ac7c-3242b0ec9b94"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Drive"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""Up"",
-                    ""id"": ""9c9a027f-67bf-4891-8802-080055b95432"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Drive"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Down"",
-                    ""id"": ""0eb9ba62-a074-409f-97ed-cfd8960d95e5"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Drive"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Left"",
-                    ""id"": ""ad27373e-95a9-43f8-9cd7-8b85f0103504"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Drive"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Right"",
-                    ""id"": ""5b6fd73c-5f3f-4741-baa8-b8518f8cf2e4"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Drive"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Arrows"",
-                    ""id"": ""41df21b5-3624-49f5-9e41-7ec5be759238"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Drive"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""6062eb03-6c85-4f45-8f27-efac30a2ea22"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Drive"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""724e1583-4a91-4174-9459-e95e141b2a0a"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Drive"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""d01009c8-8769-4727-8578-521207b3ec36"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Drive"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""cd556095-8a01-425e-be10-c9b85194e71c"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Drive"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -278,12 +56,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_Color = m_Player.FindAction("Color", throwIfNotFound: true);
-        m_Player_Rotation = m_Player.FindAction("Rotation", throwIfNotFound: true);
-        m_Player_DrivingMap = m_Player.FindAction("DrivingMap", throwIfNotFound: true);
-        // Driving
-        m_Driving = asset.FindActionMap("Driving", throwIfNotFound: true);
-        m_Driving_Drive = m_Driving.FindAction("Drive", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -345,16 +118,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_Color;
-    private readonly InputAction m_Player_Rotation;
-    private readonly InputAction m_Player_DrivingMap;
+    private readonly InputAction m_Player_Jump;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Color => m_Wrapper.m_Player_Color;
-        public InputAction @Rotation => m_Wrapper.m_Player_Rotation;
-        public InputAction @DrivingMap => m_Wrapper.m_Player_DrivingMap;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -364,28 +133,16 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-            @Color.started += instance.OnColor;
-            @Color.performed += instance.OnColor;
-            @Color.canceled += instance.OnColor;
-            @Rotation.started += instance.OnRotation;
-            @Rotation.performed += instance.OnRotation;
-            @Rotation.canceled += instance.OnRotation;
-            @DrivingMap.started += instance.OnDrivingMap;
-            @DrivingMap.performed += instance.OnDrivingMap;
-            @DrivingMap.canceled += instance.OnDrivingMap;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @Color.started -= instance.OnColor;
-            @Color.performed -= instance.OnColor;
-            @Color.canceled -= instance.OnColor;
-            @Rotation.started -= instance.OnRotation;
-            @Rotation.performed -= instance.OnRotation;
-            @Rotation.canceled -= instance.OnRotation;
-            @DrivingMap.started -= instance.OnDrivingMap;
-            @DrivingMap.performed -= instance.OnDrivingMap;
-            @DrivingMap.canceled -= instance.OnDrivingMap;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -403,60 +160,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
-
-    // Driving
-    private readonly InputActionMap m_Driving;
-    private List<IDrivingActions> m_DrivingActionsCallbackInterfaces = new List<IDrivingActions>();
-    private readonly InputAction m_Driving_Drive;
-    public struct DrivingActions
-    {
-        private @PlayerInputActions m_Wrapper;
-        public DrivingActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Drive => m_Wrapper.m_Driving_Drive;
-        public InputActionMap Get() { return m_Wrapper.m_Driving; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(DrivingActions set) { return set.Get(); }
-        public void AddCallbacks(IDrivingActions instance)
-        {
-            if (instance == null || m_Wrapper.m_DrivingActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_DrivingActionsCallbackInterfaces.Add(instance);
-            @Drive.started += instance.OnDrive;
-            @Drive.performed += instance.OnDrive;
-            @Drive.canceled += instance.OnDrive;
-        }
-
-        private void UnregisterCallbacks(IDrivingActions instance)
-        {
-            @Drive.started -= instance.OnDrive;
-            @Drive.performed -= instance.OnDrive;
-            @Drive.canceled -= instance.OnDrive;
-        }
-
-        public void RemoveCallbacks(IDrivingActions instance)
-        {
-            if (m_Wrapper.m_DrivingActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IDrivingActions instance)
-        {
-            foreach (var item in m_Wrapper.m_DrivingActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_DrivingActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public DrivingActions @Driving => new DrivingActions(this);
     public interface IPlayerActions
     {
-        void OnColor(InputAction.CallbackContext context);
-        void OnRotation(InputAction.CallbackContext context);
-        void OnDrivingMap(InputAction.CallbackContext context);
-    }
-    public interface IDrivingActions
-    {
-        void OnDrive(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }
