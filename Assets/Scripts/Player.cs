@@ -2,68 +2,108 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 public class Player : MonoBehaviour
 {
-    private PlayerInputActions _input;
-    private MeshRenderer _render;
-    private bool _jumped = false;
+    private PlayerInteractionInput _input;
+
+    [SerializeField] private InputActionAsset _playerMovement;
+    [SerializeField]private Drone_Movement _drone;
+    [SerializeField] private Camera_manager _camManager;
+
+    // private MeshRenderer _render;
+    // private bool _walking = false;
+    // private InputActionReference _inputActionReference;
+
+    [SerializeField] private float _rotSpeed;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _currentSpeed = 5;
+    private float _vertical;
+    private float _horizontal;
+    [SerializeField] private float _maxRotate;
     // Start is called before the first frame update
     void Start()
     {
-        _input = new PlayerInputActions();
-        _input.Player.Enable();
-        _input.Player.Jump.performed += Jump_performed;
-        _input.Player.Jump.canceled += Jump_canceled;
-        /*_input.Player.Color.performed += Color_performed;
-        _input.Player.DrivingMap.performed += DrivingMap_performed;
-        _render = GetComponent<MeshRenderer>();*/
+
+        InitializedInteractionMap();
     }
 
-    
-    // Update is called once per frame
+        // Update is called once per frame
     void Update()
     {
        
     }
+    /// <summary>
+    /// if the player walk into the trigger box in front of the drone the third person follow camera priority fall
+    /// and the thirdperson follow camera following the drone take higher priority
+    /// if player is controling a drone player can not move
+    /// we will disable the "_playerMovement" input system action and "_input.PlayerInteractions" the enable "_input.Drone"
+    /// </summary>
 
-    private void Jump_performed(InputAction.CallbackContext obj)
+
+
+    public void InitializedInteractionMap()
     {
-        Debug.Log("full Jump");
-        _jumped = true;
-        GetComponent<Rigidbody>().AddForce(Vector3.up * 25, ForceMode.Impulse);
+        _input = new PlayerInteractionInput();
+        _input.PlayerInteractions.Enable();
+
+        _input.PlayerInteractions.Interact.started +=
+    context =>
+    {
+        if (context.interaction is HoldInteraction)
+        {
+            //ShowChargingUI();
+            Debug.Log("Hold");
+        }
+
+    };
+
+        _input.PlayerInteractions.Interact.performed +=
+            context =>
+            {
+                if (context.interaction is TapInteraction)
+                {
+                    Debug.Log("Tap");
+                    // ChargedFire();
+                }
+                else
+                {
+                    Debug.Log("Trigger");
+                    //  Fire();
+                }
+
+            };
+
+        _input.PlayerInteractions.Interact.canceled +=
+            _ =>
+            {
+                Debug.Log("Canceled");
+                //HideChargingUI();
+            };
+
     }
-    private void Jump_canceled(InputAction.CallbackContext context)
-    {
-        var forceEffect = context.duration;
-        GetComponent<Rigidbody>().AddForce(Vector3.up * 5, ForceMode.Impulse);
 
-    }
-    private void DrivingMap_performed(InputAction.CallbackContext context)
+    
+
+   public void FlyDrone()
     {
-        _input.Player.Disable();
-        //_input.Driving.Enable();
+        _drone.DroneCanFly();
     }
 
-    private void Driving()
+    public void CamSwith0()
     {
-       // var move = _input.Driving.Drive.ReadValue<Vector2>();
-       // transform.Translate(new Vector3(move.x, 0, move.y) * Time.deltaTime * 3f);
-
+        _camManager.PlayerCamera();
+    }
+    public void CamSwitch1()
+    {
+        _camManager.DroneCamera();
     }
 
-
-   /* private void Rotating()
+    public void CamSwitch02()
     {
-        Debug.Log("Acis Value:" + _input.Player.Rotation.ReadValue<float>());
-        var rotationDirection = _input.Player.Rotation.ReadValue<float>();
-        transform.Rotate(Vector3.up * Time.deltaTime * 30f * rotationDirection);
+
     }
-    private void Color_performed(InputAction.CallbackContext context)
-    {
-        _render.material.color = Random.ColorHSV();
-
-    }*/
 
 
 }
