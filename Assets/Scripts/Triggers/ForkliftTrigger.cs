@@ -1,16 +1,14 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 
-
-
-public class DroneTrigger : MonoBehaviour
+public class ForkliftTrigger : MonoBehaviour
 {
-   [SerializeField] private Player _player;
-    [SerializeField] private InputActionAsset  _playerMovement;
+    [SerializeField] private Player _player;
+    [SerializeField] private InputActionAsset _playerMovement;
+    [SerializeField] private Forklift_Movement _forkLift;
     [SerializeField] private int powerupID;
     [SerializeField] private Camera_manager _camManager;
     // Start is called before the first frame update
@@ -18,7 +16,7 @@ public class DroneTrigger : MonoBehaviour
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
         _camManager = GetComponent<Camera_manager>();
-        if(_player == null)
+        if (_player == null)
         {
             Debug.LogError("Drone Is Null");
         }
@@ -33,7 +31,7 @@ public class DroneTrigger : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
 
-        if (other.tag == "Player"||other.tag == "Drone")
+        if (other.tag == "Player" || other.tag == "Drone")
         {
             Player player = other.transform.GetComponent<Player>();
 
@@ -43,27 +41,34 @@ public class DroneTrigger : MonoBehaviour
                 switch (powerupID)
                 {
                     case 0:
-                     
+
                         player.CamSwith0();
                         _playerMovement.Enable();
-                     
+
                         break;
                     case 1:
                         player.FlyDrone();
                         player.CamSwitch1();
                         _playerMovement.Disable();
-                       
+
                         //_playerMovement.Enable();
                         //player.StopFlyingDrone();
                         break;
-                         default:
+                    case 2:
+                        _forkLift.enabled = true;
+                        player.Forklift();
+                        player.CamSwitch2();
+                        _playerMovement.Disable();
+                        break;
+
+                    default:
                         Debug.Log("Default Value");
                         break;
                 }
-               
+
             }
         }
     }
 
-   
+
 }

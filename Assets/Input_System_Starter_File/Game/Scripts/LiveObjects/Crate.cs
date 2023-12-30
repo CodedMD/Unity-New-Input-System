@@ -49,6 +49,7 @@ namespace Game.Scripts.LiveObjects
 
         private void Start()
         {
+            _brokenCrate.SetActive(true);
             _brakeOff.AddRange(_pieces);
             
         }
@@ -60,7 +61,7 @@ namespace Game.Scripts.LiveObjects
             int rng = Random.Range(0, _brakeOff.Count);
             _brakeOff[rng].constraints = RigidbodyConstraints.None;
             _brakeOff[rng].AddForce(new Vector3(1f, 1f, 1f), ForceMode.Force);
-            _brakeOff.Remove(_brakeOff[rng]);            
+            _brakeOff.Remove(_brakeOff[rng]);           
         }
 
         IEnumerator PunchDelay()

@@ -7,16 +7,18 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 public class Camera_manager : MonoBehaviour
 {
-    [SerializeField] private PlayableDirector _director;
-    [SerializeField] private GameObject _uiDisplay;
-    [SerializeField] private InputActionAsset _playerMovemeent;
+   // [SerializeField] private PlayableDirector _director;
+   // [SerializeField] private GameObject _uiDisplay;
+    [SerializeField] private InputActionAsset _playerMovement;
     [SerializeField] private Drone_Movement _drone;
+    [SerializeField] private Forklift_Movement _forkLift;
     [SerializeField] private GameObject[] _vCams;
 
     private int _currentCam;
     private float _playTime;
     private bool _droneCam = false;
     private bool _playerCam = false;
+    private bool _forkLiftCam = false;
     // calculation variables
 
 
@@ -24,11 +26,18 @@ public class Camera_manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _playerMovemeent = GameObject.Find("Player").GetComponent<InputActionAsset>();
-        _drone = GameObject.Find("Drone").GetComponent<Drone_Movement>();
+      
+      
        // _uiDisplay.SetActive(true);
         _vCams[0].GetComponent<CinemachineVirtualCamera>().Priority = 15;
-        
+        if (_playerMovement == null)
+        {
+            Debug.LogError("Player movement null");
+        }
+        if (_drone == null)
+        {
+            Debug.LogError("_drone null");
+        }
 
     }
 
@@ -47,6 +56,10 @@ public class Camera_manager : MonoBehaviour
         {
             PlayerCamera();
         }
+        if (_forkLiftCam == true) 
+        {
+            ForkliftCamera();
+        }
         //DirectorControls();
 
 
@@ -59,17 +72,34 @@ public class Camera_manager : MonoBehaviour
         print("Player Camera");
         _vCams[0].GetComponent<CinemachineVirtualCamera>().Priority = 15;
         _vCams[1].GetComponent<CinemachineVirtualCamera>().Priority = 10;
-        _playerCam = false;
+        _vCams[2].GetComponent<CinemachineVirtualCamera>().Priority= 10;
+        _droneCam = false;
+        _forkLiftCam=false;
     }
 
 
     public void DroneCamera()
     {
+        _drone = GameObject.Find("Drone").GetComponent<Drone_Movement>();
         _droneCam = true;
         print("Drone Camera");
         _vCams[1].GetComponent<CinemachineVirtualCamera>().Priority = 15;
         _vCams[0].GetComponent<CinemachineVirtualCamera>().Priority = 10;
+        _vCams[2].GetComponent<CinemachineVirtualCamera>().Priority = 10;
+        _forkLiftCam = false;
+        _playerCam = false;
+    }
+
+    public void ForkliftCamera()
+    {
+       // _forkLift = GameObject.Find("Forklift").GetComponent<Forklift_Movement>();
+        _forkLiftCam = true;
+        print("Forklift Camera");
+        _vCams[2].GetComponent<CinemachineVirtualCamera>().Priority = 15;
+        _vCams[1].GetComponent<CinemachineVirtualCamera>().Priority = 10;
+        _vCams[0].GetComponent<CinemachineVirtualCamera>().Priority = 10;
         _droneCam = false;
+        _playerCam = false;
 
     }
 

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: CoreSettings
   m_EditorClassIdentifier: 
   Subdomain: codedgamesmd
-  AppId: 
+  AppId: 656d1776acf66ad04c2f3c94
   EnableLogging: 0
   EnableAnalytics: 1

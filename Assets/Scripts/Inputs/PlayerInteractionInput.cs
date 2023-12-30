@@ -42,7 +42,18 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
                     ""name"": """",
                     ""id"": ""f20e5216-642a-4d74-9734-5d231f58b9af"",
                     ""path"": ""<Keyboard>/x"",
-                    ""interactions"": ""Tap,Hold(duration=1)"",
+                    ""interactions"": ""Tap(duration=0.3,pressPoint=0.01),Hold(duration=1,pressPoint=0.4)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ac759f5-5143-471e-a6bf-91941379d202"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": ""Tap(duration=0.3,pressPoint=0.01),Hold(duration=1,pressPoint=0.3)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
@@ -140,6 +151,17 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""486f5f02-bc74-48ad-a527-7ecdea9aac13"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone"",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""1D Axis"",
                     ""id"": ""d61a4c78-d96a-4573-97ce-f0e0c1967cd3"",
                     ""path"": ""1DAxis"",
@@ -173,6 +195,39 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""Right Stick[GamePad]"",
+                    ""id"": ""4136dfc8-9e49-4f35-a1cd-38b57326fd85"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotation"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""0d70c376-2755-4465-9f09-89f5c356feea"",
+                    ""path"": ""<Gamepad>/rightStick/x"",
+                    ""interactions"": """",
+                    ""processors"": ""Invert"",
+                    ""groups"": """",
+                    ""action"": ""Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""ee187189-9dd3-4658-b54b-c433e7c7dfbf"",
+                    ""path"": ""<Gamepad>/rightStick/x"",
+                    ""interactions"": """",
+                    ""processors"": ""Invert"",
+                    ""groups"": """",
+                    ""action"": ""Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": ""2D Vector"",
                     ""id"": ""89b0cf67-cce0-42d6-99ad-c96005191057"",
                     ""path"": ""2DVector"",
@@ -198,6 +253,39 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
                     ""name"": ""down"",
                     ""id"": ""82f2f94c-0064-4dcf-829c-1c3e3549d8a0"",
                     ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrustUpDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""[GamePad]"",
+                    ""id"": ""fa2482f3-2c01-4634-b0bb-88067e8603e5"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrustUpDown"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""939e0d25-b292-4bda-8f14-d2a4dfd08fbb"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrustUpDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""9b9beba5-2520-4e83-afe2-d5498273dcef"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -287,6 +375,28 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""0d72b536-f144-4216-be0d-8c016d14bebf"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone"",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f82cb2d-9322-484a-a4c5-da702ec3ad0e"",
+                    ""path"": ""<Gamepad>/dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""1D Axis"",
                     ""id"": ""d476dc10-f5dd-419c-932f-9dd25ae202c8"",
                     ""path"": ""1DAxis"",
@@ -312,6 +422,39 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
                     ""name"": ""positive"",
                     ""id"": ""4eb6d4be-861d-498c-8cc5-9cb3b23d59d3"",
                     ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lift/Low"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""[GamePad]"",
+                    ""id"": ""abfa9432-61bc-43c9-b5d6-36737f22352f"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lift/Low"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""eb322918-17d0-44a3-88eb-1700bde4461c"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lift/Low"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""f6ea6601-b8ef-4a39-8176-6a895f3f63a8"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

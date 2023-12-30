@@ -6,6 +6,12 @@ TagManager:
   tags:
   - CinemachineTarget
   - Drone
+  - Liftable
+  - Crate
+  - PunchBox
+  - KickBox
+  - Forklift
+  - Forks
   layers:
   - Default
   - TransparentFX
