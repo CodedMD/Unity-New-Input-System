@@ -12,7 +12,7 @@ public class CrateBreak : MonoBehaviour
 {
     [SerializeField]private GameObject _baseCrate, _breakCrate;
     [SerializeField] public Rigidbody[] _pieces;
-    private bool _canBreak = false;
+
     [SerializeField] private PunchBox _punchBox;
     private List<Rigidbody> _breakOff = new List<Rigidbody>();
    // [SerializeField]private CratePart[] _part;    

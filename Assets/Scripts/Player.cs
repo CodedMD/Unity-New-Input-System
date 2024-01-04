@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.Rendering;
 
 public class Player : MonoBehaviour
 {
@@ -16,20 +17,13 @@ public class Player : MonoBehaviour
     [SerializeField]private Drone_Movement _drone;
     [SerializeField] private Forklift_Movement _forkLift;
     [SerializeField] private GameObject _forkliftPlayerposition;
+    [SerializeField] private TriggerPoints _trigger;
+    [SerializeField] private int _currentkey;
+    [SerializeField]private YouWin _exit;
     [SerializeField] private Camera_manager _camManager;
-    [SerializeField]private UIManager _uiManager;
+    [SerializeField]private The_UI_Manager _uiManager;
     private Animator _anim;
-   [SerializeField] private CrateBreak _crate;
-    // private MeshRenderer _render;
-    // private bool _walking = false;
-    // private InputActionReference _inputActionReference;
-
-    [SerializeField] private float _rotSpeed;
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _currentSpeed = 5;
-    private float _vertical;
-    private float _horizontal;
-    [SerializeField] private float _maxRotate;
+    [SerializeField] private CrateBreak _crate;
     [SerializeField] private BoxCollider _punchCollider;
     [SerializeField] private CapsuleCollider _kickCollider;
     // Start is called before the first frame update
@@ -46,7 +40,7 @@ public class Player : MonoBehaviour
         // Update is called once per frame
     void Update()
     {
-       
+        
     }
     /// <summary>
     /// if the player walk into the trigger box in front of the drone the third person follow camera priority fall
@@ -114,10 +108,29 @@ public class Player : MonoBehaviour
         
     }
 
+   
+    public void DoorKey() 
+    {
+        _exit.PlayerHasKey();
+        print("Key01");
+      
+        
+    }
 
+    public void ForkliftKey()
+    {
+        _trigger.PlayerCanEnter();
+    }
     public void FlyDrone()
     {
         _drone.DroneCanFly();
+        _input.PlayerInteractions.Disable();
+  
+    }
+
+    public void PlayerBackOnline()
+    {
+        _input.PlayerInteractions.Enable();
     }
 
     public void Forklift()

@@ -5,16 +5,11 @@ using UnityEngine.InputSystem;
 
 public class Drone_Movement : MonoBehaviour
 {
-        private PlayerInteractionInput _input;
+    private PlayerInteractionInput _input;
     [SerializeField] private InputActionAsset _playerMovement;
-   [SerializeField] private Player _player;
-    [SerializeField] private float _rotSpeed;
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _currentSpeed = 0;
-
-    [SerializeField] private float _maxRotate;
-    //[SerializeField] private DroneTrigger _triggerBox;
-   private Animator _anim;
+    [SerializeField] private Player _player;
+    private Animator _anim;
+    [SerializeField] private TriggerPoints _trigger;
     private enum _playerMovementState { idle, Running }
     private bool _canFly = false;
     _playerMovementState state;
@@ -84,6 +79,8 @@ public class Drone_Movement : MonoBehaviour
     public void DroneCanFly()
     {
        _canFly = true;
+        _input.PlayerInteractions.Disable();
+
         _playerMovementState state;
         state = _playerMovementState.Running;
         _anim.SetInteger("state", (int)state);
@@ -94,12 +91,16 @@ public class Drone_Movement : MonoBehaviour
            
             _player.CamSwith0();
             _playerMovement.Enable();
+            _player.PlayerBackOnline();
             _canFly = false;
 
         }
     }
 
-   
+    public void ForkliftKey()
+    {
+        _trigger.PlayerCanEnter();
+    }
 
 
 

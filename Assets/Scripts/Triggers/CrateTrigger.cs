@@ -28,11 +28,11 @@ public class CrateTrigger : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
        
-
-        if (other.tag == "Player" )
+        Player player = other.GetComponent<Player>();   
+        if ( player != null)
         {
 
-            _player.CanBreakCrate();
+            _crate.BreakableCrate();
             //_crate.BreakPart();
             _crate.BreakableCrate();   
 

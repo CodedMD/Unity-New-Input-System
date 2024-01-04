@@ -195,8 +195,8 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Right Stick[GamePad]"",
-                    ""id"": ""4136dfc8-9e49-4f35-a1cd-38b57326fd85"",
+                    ""name"": ""1D Axis"",
+                    ""id"": ""b32fe218-4efa-4be7-a115-8e7203d55cb6"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -207,10 +207,10 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
                 },
                 {
                     ""name"": ""negative"",
-                    ""id"": ""0d70c376-2755-4465-9f09-89f5c356feea"",
-                    ""path"": ""<Gamepad>/rightStick/x"",
+                    ""id"": ""c4da0ab4-479d-445c-9c4d-cef9203c02ce"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
                     ""interactions"": """",
-                    ""processors"": ""Invert"",
+                    ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Rotation"",
                     ""isComposite"": false,
@@ -218,10 +218,10 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
                 },
                 {
                     ""name"": ""positive"",
-                    ""id"": ""ee187189-9dd3-4658-b54b-c433e7c7dfbf"",
-                    ""path"": ""<Gamepad>/rightStick/x"",
+                    ""id"": ""4293f80a-000c-4819-83de-2be0c422de47"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
                     ""interactions"": """",
-                    ""processors"": ""Invert"",
+                    ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Rotation"",
                     ""isComposite"": false,

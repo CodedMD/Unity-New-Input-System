@@ -11,7 +11,7 @@ public class DroneTrigger : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private InputActionAsset  _playerMovement;
-    [SerializeField] private int powerupID;
+    [SerializeField] private int _triggerID;
     [SerializeField] private Camera_manager _camManager;
     // Start is called before the first frame update
     void Start()
@@ -33,14 +33,14 @@ public class DroneTrigger : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
 
-        if (other.tag == "Player"||other.tag == "Drone")
+        if (other.tag == "Player"||other.tag == "Drone" )
         {
             Player player = other.transform.GetComponent<Player>();
 
-            if (player != null)
+            if (player != null )
             {
 
-                switch (powerupID)
+                switch (_triggerID)
                 {
                     case 0:
                      

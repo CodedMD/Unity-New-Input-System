@@ -9,8 +9,9 @@ public class ForkliftTrigger : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private InputActionAsset _playerMovement;
     [SerializeField] private Forklift_Movement _forkLift;
-    [SerializeField] private int powerupID;
+    [SerializeField] private int _triggerID;
     [SerializeField] private Camera_manager _camManager;
+    [SerializeField] private bool _canEnter = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,13 @@ public class ForkliftTrigger : MonoBehaviour
         
     }
 
+
+    public void PlayerCanEnter()
+    {
+        _canEnter = true;
+    }
+
+
     public void OnTriggerEnter(Collider other)
     {
 
@@ -35,10 +43,10 @@ public class ForkliftTrigger : MonoBehaviour
         {
             Player player = other.transform.GetComponent<Player>();
 
-            if (player != null)
+            if (player != null && _canEnter == true )
             {
 
-                switch (powerupID)
+                switch (_triggerID)
                 {
                     case 0:
 
