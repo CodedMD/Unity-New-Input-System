@@ -10,12 +10,16 @@ public class Drone_Movement : MonoBehaviour
     [SerializeField] private Player _player;
     private Animator _anim;
     [SerializeField] private TriggerPoints _trigger;
+    [SerializeField] private The_UI_Manager _uiManager;
+    [SerializeField]private Rigidbody _rb;
     private enum _playerMovementState { idle, Running }
     private bool _canFly = false;
     _playerMovementState state;
     // Start is called before the first frame update
     void Start()
     {
+        _rb = GetComponent<Rigidbody>();
+        _rb.useGravity = false;
         _anim = GetComponent<Animator>();
         _input = new PlayerInteractionInput();
         _input.Drone.Enable();
@@ -88,10 +92,11 @@ public class Drone_Movement : MonoBehaviour
         //print("Drone Runs");
         if (Input.GetKeyDown(KeyCode.I))
         {
-           
+            _rb.useGravity = true;
             _player.CamSwith0();
             _playerMovement.Enable();
             _player.PlayerBackOnline();
+            _uiManager.ControlsNotVisable();
             _canFly = false;
 
         }

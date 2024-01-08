@@ -6,6 +6,8 @@ public class YouWin : MonoBehaviour
 {
 
     [SerializeField]private bool _playerCanExit = false;
+    [SerializeField]private GameObject _player;
+    [SerializeField] private GameObject _button;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,9 @@ public class YouWin : MonoBehaviour
     {Player player = other.GetComponent<Player>();
         if (player != null && _playerCanExit == true)
         {
-            print("YouWin");
+            _player.SetActive(false);
+            _button.SetActive(true);
+
         }
     }
 }

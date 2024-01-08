@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Game.Scripts.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,8 @@ public class Forklift_Movement : MonoBehaviour
 {
     private PlayerInteractionInput _input;
     [SerializeField] private InputActionAsset _playerMovement;
+    [SerializeField] private The_UI_Manager _uiManager;
+
     [SerializeField] private Player _player;
     [SerializeField] private MakeChild _child;
     [SerializeField] private GameObject _forks;
@@ -54,6 +57,7 @@ public class Forklift_Movement : MonoBehaviour
             _playerMovement.Enable();
             _playerObj.SetActive(true);
             _driver.SetActive(false);
+            _uiManager.ControlsNotVisable();
             _isMoving = false;
 
             _player.ForkLiftUpdate();

@@ -53,11 +53,14 @@ public class TriggerPoints : MonoBehaviour
                         player.CamSwith0();
                         _playerMovement.Enable();
 
+
                         break;
                     case 1:
                         player.FlyDrone();
                         player.CamSwitch1();
                         _playerMovement.Disable();
+                        _theUIManager.SoloObjective();
+                        _theUIManager.ControlsVisable();
 
 
                          break;
@@ -65,14 +68,21 @@ public class TriggerPoints : MonoBehaviour
                         if (_canEnter == true)
                         {
                             _forkLift.enabled = true;
+                            _playerMovement.Disable();
                             player.Forklift();
                             player.CamSwitch2();
-                            _playerMovement.Disable();
+                            _theUIManager.ControlsVisable();
+                            _theUIManager.NextControlUI();
+                            _theUIManager.SoloObjective();
                         }
                         if (_canEnter == false)
                         _theUIManager.FindTheKey();
                         break;
-
+                    case 3:
+                        _theUIManager.ControlsVisable();
+                        _theUIManager.ObjectiveNotVisable();
+                        _theUIManager.NextControlUI();
+                            break;
                     default:
                         Debug.Log("Default Value");
                         break;
