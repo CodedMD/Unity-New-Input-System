@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game.Scripts.LiveObjects;
 using Cinemachine;
+using UnityEngine.Animations;
 
 namespace Game.Scripts.Player
 {
     [RequireComponent(typeof(CharacterController))]
-    public class Player : MonoBehaviour
+    public class PlayerControl : MonoBehaviour
     {
+
+
+
         private CharacterController _controller;
+        [SerializeField]
         private Animator _anim;
         [SerializeField]
         private float _speed = 5.0f;
@@ -21,6 +26,8 @@ namespace Game.Scripts.Player
         private CinemachineVirtualCamera _followCam;
         [SerializeField]
         private GameObject _model;
+        [SerializeField]
+        private PlayerInteractionInput _input;
 
 
         private void OnEnable()
@@ -33,7 +40,39 @@ namespace Game.Scripts.Player
             Forklift.onDriveModeEntered += HidePlayer;
             Drone.OnEnterFlightMode += ReleasePlayerControl;
             Drone.onExitFlightmode += ReturnPlayerControl;
-        } 
+            _input = new PlayerInteractionInput();
+            _input.Player.Enable();
+            _input.Player.Move.started += Move_started;
+            _input.Player.Move.canceled += Move_canceled;
+            _anim.gameObject.SetActive(true);
+
+
+        }
+
+        private void Move_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+        {
+            _anim.SetFloat("Speed", 0);
+
+        }
+
+        private void Move_started(UnityEngine.InputSystem.InputAction.CallbackContext context)
+        {
+
+            var velocity = transform.forward;
+            _anim.SetFloat("Speed", Mathf.Abs(velocity.magnitude));
+            _playerGrounded = _controller.isGrounded;
+
+            if (_playerGrounded)
+            {
+                velocity.y = 0f;
+            }
+            if (!_playerGrounded)
+            {
+                velocity.y += -20f * Time.deltaTime;
+            }
+
+            _controller.Move(velocity * Time.deltaTime);
+        }
 
         private void Start()
         {
@@ -54,30 +93,18 @@ namespace Game.Scripts.Player
                 CalcutateMovement();
 
         }
+        public void DisableAnimation()
+        {
+            _anim.gameObject.SetActive(false);
+        }
 
         private void CalcutateMovement()
         {
-            _playerGrounded = _controller.isGrounded;
-            float h = Input.GetAxisRaw("Horizontal");
-            float v = Input.GetAxisRaw("Vertical");
-
-            transform.Rotate(transform.up, h);
-
-            var direction = transform.forward * v;
-            var velocity = direction * _speed;
-
-
-            _anim.SetFloat("Speed", Mathf.Abs(velocity.magnitude));
-
-
-            if (_playerGrounded)
-                velocity.y = 0f;
-            if (!_playerGrounded)
-            {
-                velocity.y += -20f * Time.deltaTime;
-            }
-            
-            _controller.Move(velocity * Time.deltaTime);                      
+            var move = _input.Player.Move.ReadValue<Vector2>();
+            var velocity = transform.forward;
+            var moveRotate = new Vector3(0, 0, move.y);
+            transform.Translate(moveRotate * Time.deltaTime * 3.0f);
+            transform.Rotate(0, move.x, 0);
 
         }
 
@@ -119,6 +146,10 @@ namespace Game.Scripts.Player
 
         private void OnDisable()
         {
+            _input.Player.Move.Disable();
+            _anim.SetFloat("Speed", 0);
+            _canMove = false;
+
             InteractableZone.onZoneInteractionComplete -= InteractableZone_onZoneInteractionComplete;
             Laptop.onHackComplete -= ReleasePlayerControl;
             Laptop.onHackEnded -= ReturnPlayerControl;
@@ -127,6 +158,7 @@ namespace Game.Scripts.Player
             Forklift.onDriveModeEntered -= HidePlayer;
             Drone.OnEnterFlightMode -= ReleasePlayerControl;
             Drone.onExitFlightmode -= ReturnPlayerControl;
+           
         }
 
     }

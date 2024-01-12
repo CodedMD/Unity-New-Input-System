@@ -1,11 +1,18 @@
 using System;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using Game.Scripts.Player;
 
 namespace Game.Scripts.LiveObjects
 {
     public class Forklift : MonoBehaviour
     {
+        [SerializeField]
+        private PlayerInteractionInput _input;
+        [SerializeField]
+        private GameObject _forks;
         [SerializeField]
         private GameObject _lift, _steeringWheel, _leftWheel, _rightWheel, _rearWheels;
         [SerializeField]
@@ -19,13 +26,28 @@ namespace Game.Scripts.LiveObjects
         private bool _inDriveMode = false;
         [SerializeField]
         private InteractableZone _interactableZone;
-
+        private float _lowerLiftLimit = 0.6f;
+        private float _raiseLiftLimit = 2.25f;
         public static event Action onDriveModeEntered;
         public static event Action onDriveModeExited;
 
         private void OnEnable()
         {
             InteractableZone.onZoneInteractionComplete += EnterDriveMode;
+            _input = new PlayerInteractionInput();
+            _input.Forklift.Enable();
+            _input.PlayerInteractions.Disable();
+            _input.Forklift.Movement.started += Movement_started;   ;
+            _input.Forklift.LiftLow.started += LiftLow_started; ;
+
+        }
+
+        private void LiftLow_started(InputAction.CallbackContext obj)
+        {
+        }
+
+        private void Movement_started(InputAction.CallbackContext obj)
+        {
         }
 
         private void EnterDriveMode(InteractableZone zone)
@@ -53,40 +75,36 @@ namespace Game.Scripts.LiveObjects
         {
             if (_inDriveMode == true)
             {
+
                 LiftControls();
                 CalcutateMovement();
                 if (Input.GetKeyDown(KeyCode.Escape))
+                {
                     ExitDriveMode();
+
+                }
             }
 
         }
 
         private void CalcutateMovement()
         {
-            float h = Input.GetAxisRaw("Horizontal");
-            float v = Input.GetAxisRaw("Vertical");
-            var direction = new Vector3(0, 0, v);
-            var velocity = direction * _speed;
-
-            transform.Translate(velocity * Time.deltaTime);
-
-            if (Mathf.Abs(v) > 0)
-            {
-                var tempRot = transform.rotation.eulerAngles;
-                tempRot.y += h * _speed / 2;
-                transform.rotation = Quaternion.Euler(tempRot);
-            }
+            var move = _input.Forklift.Movement.ReadValue<Vector2>();
+            var moveRotate = new Vector3(0, 0, move.y);
+            transform.Translate(moveRotate * Time.deltaTime * 3.0f);
+            transform.Rotate(0, move.x, 0);
         }
 
         private void LiftControls()
         {
-            if (Input.GetKey(KeyCode.R))
-                LiftUpRoutine();
-            else if (Input.GetKey(KeyCode.T))
-                LiftDownRoutine();
+            var liftForks = _input.Forklift.LiftLow.ReadValue<float>();
+            Vector3 yPos = _forks.transform.localPosition;
+            yPos.y = Mathf.Clamp(yPos.y, _lowerLiftLimit, _raiseLiftLimit);
+            _forks.transform.localPosition = yPos;
+            _forks.transform.Translate((Vector3.up * Time.deltaTime * 3.0f * liftForks), transform.parent);
         }
 
-        private void LiftUpRoutine()
+       /* private void LiftUpRoutine()
         {
             if (_lift.transform.localPosition.y < _liftUpperLimit.y)
             {
@@ -108,7 +126,7 @@ namespace Game.Scripts.LiveObjects
             }
             else if (_lift.transform.localPosition.y <= _liftUpperLimit.y)
                 _lift.transform.localPosition = _liftLowerLimit;
-        }
+        }*/
 
         private void OnDisable()
         {

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using Game.Scripts.Player;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace Game.Scripts.LiveObjects
 {
@@ -19,6 +21,9 @@ namespace Game.Scripts.LiveObjects
         private int _activeCamera = 0;
         [SerializeField]
         private InteractableZone _interactableZone;
+        [SerializeField] private PlayerInteractionInput _input;
+        [SerializeField] private PlayerControl _player;
+
 
         public static event Action onHackComplete;
         public static event Action onHackEnded;
@@ -31,8 +36,11 @@ namespace Game.Scripts.LiveObjects
 
         private void Update()
         {
+
             if (_hacked == true)
             {
+                _player.enabled = false;
+
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     var previous = _activeCamera;
@@ -49,6 +57,8 @@ namespace Game.Scripts.LiveObjects
 
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
+                    _player.enabled = true;
+
                     _hacked = false;
                     onHackEnded?.Invoke();
                     ResetCameras();
@@ -79,7 +89,12 @@ namespace Game.Scripts.LiveObjects
             if (zoneID == 3) //Hacking terminal
             {
                 if (_hacked == true)
+                {
+                    _input = new PlayerInteractionInput();
+                    _input.Player.Disable();
                     return;
+                }
+                    
 
                 StopAllCoroutines();
                 _progressBar.gameObject.SetActive(false);
@@ -112,6 +127,7 @@ namespace Game.Scripts.LiveObjects
         {
             InteractableZone.onHoldStarted -= InteractableZone_onHoldStarted;
             InteractableZone.onHoldEnded -= InteractableZone_onHoldEnded;
+
         }
     }
 

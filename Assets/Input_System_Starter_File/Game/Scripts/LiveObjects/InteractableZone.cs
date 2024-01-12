@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Scripts.UI;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using Game.Scripts.Player;
 
 
 namespace Game.Scripts.LiveObjects
@@ -61,6 +63,8 @@ namespace Game.Scripts.LiveObjects
             }
         }
 
+
+        [SerializeField] private PlayerControl _player;
 
         public static event Action<InteractableZone> onZoneInteractionComplete;
         public static event Action<int> onHoldStarted;
@@ -145,6 +149,7 @@ namespace Game.Scripts.LiveObjects
                                 PerformAction();
                                 _actionPerformed = true;
                                 UIManager.Instance.DisplayInteractableZoneMessage(false);
+
                             }
                             break;
                     }
@@ -165,6 +170,7 @@ namespace Game.Scripts.LiveObjects
 
                 if (Input.GetKeyUp(_zoneKeyInput) && _keyState == KeyState.PressHold)
                 {
+
                     _inHoldState = false;
                     onHoldEnded?.Invoke(_zoneID);
                 }
@@ -199,12 +205,16 @@ namespace Game.Scripts.LiveObjects
                 UIManager.Instance.UpdateInventoryDisplay(_inventoryIcon);
 
             onZoneInteractionComplete?.Invoke(this);
+
+
         }
 
         private void PerformHoldAction()
         {
             UIManager.Instance.DisplayInteractableZoneMessage(false);
             onHoldStarted?.Invoke(_zoneID);
+
+
         }
 
         public GameObject[] GetItems()
