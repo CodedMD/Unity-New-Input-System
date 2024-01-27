@@ -17,7 +17,7 @@ namespace Game.Scripts.Player
         [SerializeField]
         private Animator _anim;
         [SerializeField]
-        private float _speed = 5.0f;
+        private float _speed;
         private bool _playerGrounded;
         [SerializeField]
         private Detonator _detonator;

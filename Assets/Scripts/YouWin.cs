@@ -24,7 +24,7 @@ public class YouWin : MonoBehaviour
         _playerCanExit= true;
     }
     public void OnTriggerEnter(Collider other)
-    {Player player = other.GetComponent<Player>();
+    {PlayerMovement player = other.GetComponent<PlayerMovement>();
         if (player != null && _playerCanExit == true)
         {
             _player.SetActive(false);

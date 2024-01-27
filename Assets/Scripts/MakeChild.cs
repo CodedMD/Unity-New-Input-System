@@ -5,13 +5,12 @@ using UnityEngine;
 
 public class MakeChild : MonoBehaviour
 {
-    public Transform _parentTransform;
+    [SerializeField] private Transform _parentTransform;
     [SerializeField] private GameObject _parent;
     private bool _isChild = false;
 
     private void Start()
     {
-        _isChild = true;
     }
     private void Update()
     {

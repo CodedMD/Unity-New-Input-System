@@ -27,7 +27,7 @@ public class CollectableKeys : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        Player player = other.GetComponent<Player>();
+        PlayerMovement player = other.GetComponent<PlayerMovement>();
         Drone_Movement drone = other.GetComponent<Drone_Movement>();
         if (player != null)
         {

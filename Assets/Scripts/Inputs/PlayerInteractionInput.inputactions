@@ -176,7 +176,7 @@
                     "type": "Value",
                     "id": "24a8c4c9-2d6d-45b2-b7f8-886b63be4ffa",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "InvertVector2(invertY=false)",
                     "interactions": "",
                     "initialStateCheck": true
                 },
@@ -185,7 +185,7 @@
                     "type": "Button",
                     "id": "792eec7f-67c1-4cbe-827b-0a59adcd8d46",
                     "expectedControlType": "Button",
-                    "processors": "",
+                    "processors": "Invert",
                     "interactions": "",
                     "initialStateCheck": false
                 },
@@ -193,10 +193,19 @@
                     "name": "ThrustUpDown",
                     "type": "Value",
                     "id": "fdec9111-c787-42bd-8104-933693c342fd",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
+                    "expectedControlType": "Axis",
+                    "processors": "Invert",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Exit",
+                    "type": "Button",
+                    "id": "0109dc8f-ed1d-4af7-a3ac-7fe04e84183e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -388,9 +397,9 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "2D Vector",
+                    "name": "1D Axis",
                     "id": "89b0cf67-cce0-42d6-99ad-c96005191057",
-                    "path": "2DVector",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -399,7 +408,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
+                    "name": "Negative",
                     "id": "0c5fda05-fe97-40db-8963-c36087c1f22f",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -410,7 +419,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "down",
+                    "name": "Positive",
                     "id": "82f2f94c-0064-4dcf-829c-1c3e3549d8a0",
                     "path": "<Keyboard>/v",
                     "interactions": "",
@@ -445,13 +454,35 @@
                 {
                     "name": "down",
                     "id": "9b9beba5-2520-4e83-afe2-d5498273dcef",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "ThrustUpDown",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "01286efe-438e-4d84-bb9d-e91ca9709592",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Exit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b85cb4dd-8ca2-4eda-8414-e03f029441b2",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Exit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

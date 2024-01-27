@@ -6,8 +6,8 @@ using Cinemachine;
 
 public class ForkliftTrigger : MonoBehaviour
 {
-    [SerializeField] private Player _player;
-    [SerializeField] private InputActionAsset _playerMovement;
+    [SerializeField] private PlayerMovement _player;
+    [SerializeField] private PlayerControls _playerMovement;
     [SerializeField] private Forklift_Movement _forkLift;
     [SerializeField] private int _triggerID;
     [SerializeField] private Camera_manager _camManager;
@@ -15,7 +15,7 @@ public class ForkliftTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.Find("Player").GetComponent<Player>();
+       
         _camManager = GetComponent<Camera_manager>();
         if (_player == null)
         {
@@ -41,7 +41,7 @@ public class ForkliftTrigger : MonoBehaviour
 
         if (other.tag == "Player" || other.tag == "Drone")
         {
-            Player player = other.transform.GetComponent<Player>();
+            PlayerMovement player = other.transform.GetComponent<PlayerMovement>();
 
             if (player != null && _canEnter == true )
             {

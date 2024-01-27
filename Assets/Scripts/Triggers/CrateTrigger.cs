@@ -8,7 +8,7 @@ public class CrateTrigger : MonoBehaviour
 
     [SerializeField] private CrateBreak _crate;
    // [SerializeField] private GameObject _wholeCrate, _brokenCrate;
-    [SerializeField]private Player _player;
+    [SerializeField]private PlayerMovement _player;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +28,7 @@ public class CrateTrigger : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
        
-        Player player = other.GetComponent<Player>();   
+        PlayerMovement player = other.GetComponent<PlayerMovement>();   
         if ( player != null)
         {
 

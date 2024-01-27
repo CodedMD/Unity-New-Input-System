@@ -198,7 +198,7 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
                     ""type"": ""Value"",
                     ""id"": ""24a8c4c9-2d6d-45b2-b7f8-886b63be4ffa"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
+                    ""processors"": ""InvertVector2(invertY=false)"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
@@ -207,7 +207,7 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
                     ""type"": ""Button"",
                     ""id"": ""792eec7f-67c1-4cbe-827b-0a59adcd8d46"",
                     ""expectedControlType"": ""Button"",
-                    ""processors"": """",
+                    ""processors"": ""Invert"",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
@@ -215,10 +215,19 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
                     ""name"": ""ThrustUpDown"",
                     ""type"": ""Value"",
                     ""id"": ""fdec9111-c787-42bd-8104-933693c342fd"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": ""Invert"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""0109dc8f-ed1d-4af7-a3ac-7fe04e84183e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -410,9 +419,9 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""2D Vector"",
+                    ""name"": ""1D Axis"",
                     ""id"": ""89b0cf67-cce0-42d6-99ad-c96005191057"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -421,7 +430,7 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
+                    ""name"": ""Negative"",
                     ""id"": ""0c5fda05-fe97-40db-8963-c36087c1f22f"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -432,7 +441,7 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""down"",
+                    ""name"": ""Positive"",
                     ""id"": ""82f2f94c-0064-4dcf-829c-1c3e3549d8a0"",
                     ""path"": ""<Keyboard>/v"",
                     ""interactions"": """",
@@ -467,13 +476,35 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
                 {
                     ""name"": ""down"",
                     ""id"": ""9b9beba5-2520-4e83-afe2-d5498273dcef"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ThrustUpDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""01286efe-438e-4d84-bb9d-e91ca9709592"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b85cb4dd-8ca2-4eda-8414-e03f029441b2"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -715,6 +746,7 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
         m_Drone_Movement = m_Drone.FindAction("Movement", throwIfNotFound: true);
         m_Drone_Rotation = m_Drone.FindAction("Rotation", throwIfNotFound: true);
         m_Drone_ThrustUpDown = m_Drone.FindAction("ThrustUpDown", throwIfNotFound: true);
+        m_Drone_Exit = m_Drone.FindAction("Exit", throwIfNotFound: true);
         // Forklift
         m_Forklift = asset.FindActionMap("Forklift", throwIfNotFound: true);
         m_Forklift_Movement = m_Forklift.FindAction("Movement", throwIfNotFound: true);
@@ -875,6 +907,7 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
     private readonly InputAction m_Drone_Movement;
     private readonly InputAction m_Drone_Rotation;
     private readonly InputAction m_Drone_ThrustUpDown;
+    private readonly InputAction m_Drone_Exit;
     public struct DroneActions
     {
         private @PlayerInteractionInput m_Wrapper;
@@ -882,6 +915,7 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
         public InputAction @Movement => m_Wrapper.m_Drone_Movement;
         public InputAction @Rotation => m_Wrapper.m_Drone_Rotation;
         public InputAction @ThrustUpDown => m_Wrapper.m_Drone_ThrustUpDown;
+        public InputAction @Exit => m_Wrapper.m_Drone_Exit;
         public InputActionMap Get() { return m_Wrapper.m_Drone; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -900,6 +934,9 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
             @ThrustUpDown.started += instance.OnThrustUpDown;
             @ThrustUpDown.performed += instance.OnThrustUpDown;
             @ThrustUpDown.canceled += instance.OnThrustUpDown;
+            @Exit.started += instance.OnExit;
+            @Exit.performed += instance.OnExit;
+            @Exit.canceled += instance.OnExit;
         }
 
         private void UnregisterCallbacks(IDroneActions instance)
@@ -913,6 +950,9 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
             @ThrustUpDown.started -= instance.OnThrustUpDown;
             @ThrustUpDown.performed -= instance.OnThrustUpDown;
             @ThrustUpDown.canceled -= instance.OnThrustUpDown;
+            @Exit.started -= instance.OnExit;
+            @Exit.performed -= instance.OnExit;
+            @Exit.canceled -= instance.OnExit;
         }
 
         public void RemoveCallbacks(IDroneActions instance)
@@ -997,6 +1037,7 @@ public partial class @PlayerInteractionInput: IInputActionCollection2, IDisposab
         void OnMovement(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
         void OnThrustUpDown(InputAction.CallbackContext context);
+        void OnExit(InputAction.CallbackContext context);
     }
     public interface IForkliftActions
     {

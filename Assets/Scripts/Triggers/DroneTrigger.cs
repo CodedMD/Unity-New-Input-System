@@ -9,14 +9,14 @@ using Cinemachine;
 
 public class DroneTrigger : MonoBehaviour
 {
-    [SerializeField] private Player _player;
-    [SerializeField] private InputActionAsset  _playerMovement;
+    [SerializeField] private PlayerMovement _player;
+    [SerializeField] private PlayerControls  _input;
     [SerializeField] private int _triggerID;
     [SerializeField] private Camera_manager _camManager;
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.Find("Player").GetComponent<Player>();
+        _player = GameObject.Find("Player").GetComponent<PlayerMovement>();
         _camManager = GetComponent<Camera_manager>();
         if(_player == null)
         {
@@ -35,7 +35,7 @@ public class DroneTrigger : MonoBehaviour
 
         if (other.tag == "Player"||other.tag == "Drone" )
         {
-            Player player = other.transform.GetComponent<Player>();
+            PlayerMovement player = other.transform.GetComponent<PlayerMovement>();
 
             if (player != null )
             {
@@ -45,13 +45,13 @@ public class DroneTrigger : MonoBehaviour
                     case 0:
                      
                         player.CamSwith0();
-                        _playerMovement.Enable();
+                        _input.Enable();
                      
                         break;
                     case 1:
                         player.FlyDrone();
                         player.CamSwitch1();
-                        _playerMovement.Disable();
+                        _input.Disable();
                        
                         //_playerMovement.Enable();
                         //player.StopFlyingDrone();

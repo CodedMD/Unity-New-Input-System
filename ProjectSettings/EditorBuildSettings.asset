@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TrainingGrounds.unity
-    guid: dba20efc070ceeb4bbfd076534a31647
+    path: Assets/Input_System_Starter_File/Game/Scenes/Game.unity
+    guid: 1f57a532865e2004881b67f33f7d439c
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: a67c31cd90695c244ac0edf237daf460, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 73b0e1b350da37840a3482448a47c08d, type: 2}

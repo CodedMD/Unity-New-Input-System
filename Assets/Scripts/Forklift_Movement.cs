@@ -6,12 +6,11 @@ using UnityEngine.InputSystem;
 
 public class Forklift_Movement : MonoBehaviour
 {
-    private PlayerInteractionInput _input;
-    [SerializeField] private InputActionAsset _playerMovement;
+    private PlayerControls _input;
     [SerializeField] private The_UI_Manager _uiManager;
 
-    [SerializeField] private Player _player;
-    [SerializeField] private MakeChild _child;
+    [SerializeField] private PlayerMovement _player;
+   // [SerializeField] private MakeChild _child;
     [SerializeField] private GameObject _forks;
     [SerializeField] private GameObject _driver;
     [SerializeField] private GameObject _playerObj;
@@ -23,25 +22,14 @@ public class Forklift_Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      //  _forkLift = GetComponent<Lift_Forks>();
-        _input = new PlayerInteractionInput();
+        //  _forkLift = GetComponent<Lift_Forks>();
+        _input = new PlayerControls();
         _input.Forklift.Enable();
-        _input.Forklift.Movement.started += Movement_started;
-        _input.Forklift.LiftLow.started += LiftLow_started;
         _driver.SetActive(true);
         _playerObj.SetActive(false);
     }
 
-    private void LiftLow_started(InputAction.CallbackContext obj)
-    {
-
-
-    }
-
-    private void Movement_started(InputAction.CallbackContext obj)
-    {
-
-    }
+ 
 
     // Update is called once per frame
     void Update()
@@ -54,7 +42,7 @@ public class Forklift_Movement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             _player.CamSwith0();
-            _playerMovement.Enable();
+            _input.Enable();
             _playerObj.SetActive(true);
             _driver.SetActive(false);
             _uiManager.ControlsNotVisable();
@@ -75,7 +63,7 @@ public class Forklift_Movement : MonoBehaviour
 
     public void MoveThatForklift()
     {
-        var move = _input.Forklift.Movement.ReadValue<Vector2>();
+        var move = _input.Forklift.movement.ReadValue<Vector2>();
         var moveRotate = new Vector3(0, 0, move.y);
         transform.Translate(moveRotate * Time.deltaTime * 3.0f);
         transform.Rotate(0,move.x,0);
@@ -90,7 +78,7 @@ public class Forklift_Movement : MonoBehaviour
     {
         
 
-        var liftForks = _input.Forklift.LiftLow.ReadValue<float>();
+        var liftForks = _input.Forklift.LiftForks.ReadValue<float>();
         Vector3 yPos = _forks.transform.localPosition;
         yPos.y = Mathf.Clamp(yPos.y, _lowerLiftLimit, _raiseLiftLimit);
         _forks.transform.localPosition = yPos;

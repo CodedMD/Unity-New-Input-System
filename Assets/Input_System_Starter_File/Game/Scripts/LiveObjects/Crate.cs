@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.Interactions;
 
 namespace Game.Scripts.LiveObjects
 {
@@ -12,7 +11,6 @@ namespace Game.Scripts.LiveObjects
         [SerializeField] private Rigidbody[] _pieces;
         [SerializeField] private BoxCollider _crateCollider;
         [SerializeField] private InteractableZone _interactableZone;
-        private PlayerInteractionInput _input;
         private bool _isReadyToBreak = false;
 
         private List<Rigidbody> _brakeOff = new List<Rigidbody>();
@@ -20,8 +18,6 @@ namespace Game.Scripts.LiveObjects
         private void OnEnable()
         {
             InteractableZone.onZoneInteractionComplete += InteractableZone_onZoneInteractionComplete;
-            InitializedInteractionMap();
-            
         }
 
         private void InteractableZone_onZoneInteractionComplete(InteractableZone zone)
@@ -36,55 +32,18 @@ namespace Game.Scripts.LiveObjects
 
             if (_isReadyToBreak && zone.GetZoneID() == 6) //Crate zone            
             {
-                _input.PlayerInteractions.Interact.performed +=
-                context =>
+                if (_brakeOff.Count > 0)
                 {
-                    if (context.interaction is HoldInteraction)
-                    {
-                        if (_brakeOff.Count > 0)
-                        {
-                            BreakPart();
-                            BreakPart();
-
-                            StartCoroutine(PunchDelay());
-                        }
-                        else if (_brakeOff.Count == 0)
-                        {
-                            _isReadyToBreak = false;
-                            _crateCollider.enabled = false;
-                            _interactableZone.CompleteTask(6);
-                            Debug.Log("Completely Busted");
-                        }
-                        Debug.Log("Hold");
-
-                    }
-                    else
-                    {
-                        if (_brakeOff.Count > 0)
-                        {
-                            BreakPart();
-                            StartCoroutine(PunchDelay());
-                        }
-                        else if (_brakeOff.Count == 0)
-                        {
-                            _isReadyToBreak = false;
-                            _crateCollider.enabled = false;
-                            _interactableZone.CompleteTask(6);
-                            Debug.Log("Completely Busted");
-                        }
-
-                        Debug.Log("Tap");
-                        //  Fire();
-                    }
-
-                };
-
-                _input.PlayerInteractions.Interact.canceled +=
-                    _ =>
-                    {
-
-                    };
-              
+                    BreakPart();
+                    StartCoroutine(PunchDelay());
+                }
+                else if(_brakeOff.Count == 0)
+                {
+                    _isReadyToBreak = false;
+                    _crateCollider.enabled = false;
+                    _interactableZone.CompleteTask(6);
+                    Debug.Log("Completely Busted");
+                }
             }
         }
 
@@ -115,18 +74,6 @@ namespace Game.Scripts.LiveObjects
 
             _interactableZone.ResetAction(6);
         }
-
-        public void InitializedInteractionMap()
-        {
-
-            _input = new PlayerInteractionInput();
-            _input.PlayerInteractions.Enable();
-
-           
-
-
-        }
-
 
         private void OnDisable()
         {

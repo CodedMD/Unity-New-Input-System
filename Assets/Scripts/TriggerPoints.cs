@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using StarterAssets;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class TriggerPoints : MonoBehaviour
 {
-    [SerializeField] private Player _player;
+    [SerializeField] private PlayerMovement _player;
     [SerializeField] private InputActionAsset _playerMovement;
     [SerializeField] private Forklift_Movement _forkLift;
     [SerializeField] private int _triggerID;
@@ -15,12 +16,9 @@ public class TriggerPoints : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.Find("Player").GetComponent<Player>();
+       // _player = GameObject.Find("Player").GetComponent<PlayerMovement>();
         _camManager = GetComponent<Camera_manager>();
-        if (_player == null)
-        {
-            Debug.LogError("Drone Is Null");
-        }
+       
     }
 
     // Update is called once per frame
@@ -41,9 +39,9 @@ public class TriggerPoints : MonoBehaviour
 
         if (other.tag == "Player" || other.tag == "Drone")
         {
-            Player player = other.transform.GetComponent<Player>();
+            PlayerMovement player = other.transform.GetComponent<PlayerMovement>();
 
-            if (player != null )
+            if (player != null)
             {
 
                 switch (_triggerID)
@@ -53,36 +51,26 @@ public class TriggerPoints : MonoBehaviour
                         player.CamSwith0();
                         _playerMovement.Enable();
 
-
                         break;
                     case 1:
                         player.FlyDrone();
                         player.CamSwitch1();
                         _playerMovement.Disable();
-                        _theUIManager.SoloObjective();
-                        _theUIManager.ControlsVisable();
 
 
-                         break;
+                        break;
                     case 2:
                         if (_canEnter == true)
                         {
                             _forkLift.enabled = true;
-                            _playerMovement.Disable();
                             player.Forklift();
                             player.CamSwitch2();
-                            _theUIManager.ControlsVisable();
-                            _theUIManager.NextControlUI();
-                            _theUIManager.SoloObjective();
+                            _playerMovement.Disable();
                         }
                         if (_canEnter == false)
-                        _theUIManager.FindTheKey();
+                            _theUIManager.FindTheKey();
                         break;
-                    case 3:
-                        _theUIManager.ControlsVisable();
-                        _theUIManager.ObjectiveNotVisable();
-                        _theUIManager.NextControlUI();
-                            break;
+
                     default:
                         Debug.Log("Default Value");
                         break;

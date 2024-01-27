@@ -9,19 +9,19 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.Rendering;
 
-public class Player : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     private PlayerInteractionInput _input;
 
     [SerializeField] private InputActionAsset _playerMovement;
-    [SerializeField]private Drone_Movement _drone;
+    [SerializeField] private Drone_Movement _drone;
     [SerializeField] private Forklift_Movement _forkLift;
     [SerializeField] private GameObject _forkliftPlayerposition;
     [SerializeField] private TriggerPoints _trigger;
     [SerializeField] private int _currentkey;
-    [SerializeField]private YouWin _exit;
+    [SerializeField] private YouWin _exit;
     [SerializeField] private Camera_manager _camManager;
-    [SerializeField]private The_UI_Manager _uiManager;
+    [SerializeField] private The_UI_Manager _uiManager;
     private Animator _anim;
     [SerializeField] private CrateBreak _crate;
     [SerializeField] private BoxCollider _punchCollider;
@@ -37,10 +37,10 @@ public class Player : MonoBehaviour
         InitializedInteractionMap();
     }
 
-        // Update is called once per frame
+    // Update is called once per frame
     void Update()
     {
-        
+
     }
     /// <summary>
     /// if the player walk into the trigger box in front of the drone the third person follow camera priority fall
@@ -73,12 +73,11 @@ public class Player : MonoBehaviour
                 {
                     _anim.SetTrigger("Elbow");
                     _kickCollider.enabled = true;
-                    //_crate.BreakPart();
-                    //_crate.BreakPart();
+
                     Debug.Log("Tap");
 
                 }
-                else 
+                else
                 {
 
                     _anim.SetTrigger("Punch");
@@ -95,26 +94,25 @@ public class Player : MonoBehaviour
             {
                 _punchCollider.enabled = false;
                 _kickCollider.enabled = false;
-                Debug.LogError("Canceled");
-                //HideChargingUI();
+
             };
-        
+
 
     }
 
     public void ForkLiftUpdate()
     {
         transform.position = _forkliftPlayerposition.transform.position;
-        
+
     }
 
-   
-    public void DoorKey() 
+
+    public void DoorKey()
     {
         _exit.PlayerHasKey();
         print("Key01");
-      
-        
+
+
     }
 
     public void ForkliftKey()
@@ -125,7 +123,7 @@ public class Player : MonoBehaviour
     {
         _drone.DroneCanFly();
         _input.PlayerInteractions.Disable();
-  
+
     }
 
     public void PlayerBackOnline()
